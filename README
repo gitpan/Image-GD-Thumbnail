@@ -1,5 +1,5 @@
-Image/GD/Thumbnail version 0.01
-===============================
+Image/GD/Thumbnail version 0.011
+================================
 
 Uses the GD interface to produce a thumbnail image of specified size from a source image.
 

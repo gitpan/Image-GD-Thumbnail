@@ -3,7 +3,7 @@ package Image::GD::Thumbnail;
 use 5.006;
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.011';
 
 =head1 NAME
 
@@ -35,6 +35,7 @@ Image::GD::Thumbnail - create thumbnail images with GD
 This module uses the GD library to create a thumbnail image with no side bigger than you specify.
 
 The subroutine C<create> takes two arguments: the first is a GD image object, the second is the size, in pixels, you wish the image's longest side to be.
+It returns a new GD image object (the thumbnail), as well as the I<x> and I<y> dimensions, as scalars.
 
 =head1 PREREQUISITES
 
@@ -47,7 +48,7 @@ sub create { my ($orig,$n) = (shift,shift);
 	my $r = $ox>$oy ? $ox / $n : $oy / $n;
 	my $thumb = new GD::Image($ox/$r,$oy/$r);
 	$thumb->copyResized($orig,0,0,0,0,$ox/$r,$oy/$r,$ox,$oy);
-	return $thumb;
+	return $thumb, sprintf("%.0f",$ox/$r), sprintf("%.0f",$oy/$r);
 }
 
 1;
