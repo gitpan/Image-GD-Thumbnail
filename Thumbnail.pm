@@ -1,6 +1,5 @@
 package Image::GD::Thumbnail;
 
-use 5.006;
 use strict;
 use warnings;
 our $VERSION = '0.011';
@@ -67,5 +66,11 @@ Lee Goddard <LGoddard@CPAN.org>
 
 L<perl>, L<GD>.
 
+=head1 COPYRIGT
+
+Copyright (C) Lee Godadrd 2001 all rights reserved.
+Available under the same terms as Perl itself.
+
 =cut
 
+__END__

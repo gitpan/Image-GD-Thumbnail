@@ -1,11 +1,9 @@
 Image/GD/Thumbnail version 0.011
 ================================
 
-Uses the GD interface to produce a thumbnail image of specified size from a source image.
-
 INSTALLATION
 
-To install this module do the usual:
+To install this module type the following:
 
    perl Makefile.PL
    make
@@ -14,12 +12,12 @@ To install this module do the usual:
 
 DEPENDENCIES
 
-This module requires the GD module.
+This module requires these other modules and libraries:
 
+  GD
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2001 Lee Goddard <lgoddard@cpan.org>
+Put the correct copyright and licence information here.
 
-This module may only be used under the same terms as perl itself.
 
