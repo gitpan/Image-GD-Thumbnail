@@ -2,30 +2,31 @@ package Image::GD::Thumbnail;
 
 use strict;
 use warnings;
-our $VERSION = '0.011';
+our $VERSION = '0.02';	# Just updated POD to be correct...
 
 =head1 NAME
 
-Image::GD::Thumbnail - create thumbnail images with GD
+Image::GD::Thumbnail - produce thumbnail images with GD
 
 =head1 SYNOPSIS
 
-  use GD;
-  use Image::GD::Thumbnail;
+	use GD;
+	use Image::GD::Thumbnail;
 
-  # Load your source image
-  open IN, 'E:/Images/test.jpg'  or die "Could not open.";
-  my $srcImage = GD::Image->newFromJpeg(*IN);
-  close IN;
+	# Load your source image
+	open IN, 'E:/Images/test.jpg'  or die "Could not open.";
+	my $srcImage = GD::Image->newFromJpeg(*IN);
+	close IN;
 
-  # Create the thumbnail from it, where the biggest side is 50 px
-  my $thumb = create($srcImage,50);
+	# Create the thumbnail from it, where the biggest side is 50 px
+	my ($thumb,$x,$y) = Image::GD::Thumbnail::create($srcImage,50);
 
-  # Save your thumbnail
-  open OUT, ">E:/Images/thumb_test.jpg" or die "Could not save ";
-  binmode OUT;
-  print OUT $thumb->jpeg;
-  close OUT;
+
+	# Save your thumbnail
+	open OUT, ">E:/Images/thumb_test.jpg" or die "Could not save ";
+	binmode OUT;
+	print OUT $thumb->jpeg;
+	close OUT;
 
   __END__
 
@@ -33,8 +34,10 @@ Image::GD::Thumbnail - create thumbnail images with GD
 
 This module uses the GD library to create a thumbnail image with no side bigger than you specify.
 
-The subroutine C<create> takes two arguments: the first is a GD image object, the second is the size, in pixels, you wish the image's longest side to be.
-It returns a new GD image object (the thumbnail), as well as the I<x> and I<y> dimensions, as scalars.
+The subroutine C<create> takes two arguments: the first is a GD image object,
+the second is the size, in pixels, you wish the image's longest side to be.
+It returns a new GD image object (the thumbnail), as well as the I<x> and I<y>
+dimensions, as (integer) scalars.
 
 =head1 PREREQUISITES
 
