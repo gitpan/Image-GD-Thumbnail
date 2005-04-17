@@ -1,8 +1,9 @@
 package Image::GD::Thumbnail;
 
+our $VERSION = '0.04';
+use Carp;
 use strict;
 use warnings;
-our $VERSION = '0.02';	# Just updated POD to be correct...
 
 =head1 NAME
 
@@ -45,10 +46,19 @@ dimensions, as (integer) scalars.
 
 =cut
 
-sub create { my ($orig,$n) = (shift,shift);
+sub create { my ($orig,$max) = (shift,shift);
+	confess "No image supplied" unless $orig;
+	confess "No scale factor or geometry" unless $max;
+
 	my ($ox,$oy) = $orig->getBounds();
-	my $r = $ox>$oy ? $ox / $n : $oy / $n;
-	my $thumb = new GD::Image($ox/$r,$oy/$r);
+	my ($maxx, $maxy);
+	if (($maxx, $maxy) = $max =~ /^(\d+)x(\d+)$/i){
+		$max = ($ox>$oy)? $maxx : $maxy;
+	} else {
+		$maxx = $maxy = $max;
+	}
+	my $r = ($ox>$oy) ? ($ox/$maxx) : ($oy/$maxy);
+	my $thumb = GD::Image->new($ox/$r,$oy/$r);
 	$thumb->copyResized($orig,0,0,0,0,$ox/$r,$oy/$r,$ox,$oy);
 	return $thumb, sprintf("%.0f",$ox/$r), sprintf("%.0f",$oy/$r);
 }
@@ -63,7 +73,7 @@ None by default.
 
 =head1 AUTHOR
 
-Lee Goddard <LGoddard@CPAN.org>
+Lee Goddard <cpan -at- leegoddard -dot- net>
 
 =head1 SEE ALSO
 
