@@ -1,6 +1,6 @@
 package Image::GD::Thumbnail;
 
-our $VERSION = '0.04';
+our $VERSION = '0.041';
 use Carp;
 use strict;
 use warnings;
@@ -57,7 +57,10 @@ sub create { my ($orig,$max) = (shift,shift);
 	} else {
 		$maxx = $maxy = $max;
 	}
-	my $r = ($ox>$oy) ? ($ox/$maxx) : ($oy/$maxy);
+
+	# my $r = ($ox>$oy) ? ($ox/$maxx) : ($oy/$maxy);
+	  my $r = ($ox/$maxx) > ($oy/$maxy) ? ($ox/$maxx) : ($oy/$maxy);
+
 	my $thumb = GD::Image->new($ox/$r,$oy/$r);
 	$thumb->copyResized($orig,0,0,0,0,$ox/$r,$oy/$r,$ox,$oy);
 	return $thumb, sprintf("%.0f",$ox/$r), sprintf("%.0f",$oy/$r);
@@ -79,9 +82,9 @@ Lee Goddard <cpan -at- leegoddard -dot- net>
 
 L<perl>, L<GD>.
 
-=head1 COPYRIGT
+=head1 COPYRIGHT
 
-Copyright (C) Lee Godadrd 2001 all rights reserved.
+Copyright (C) Lee Godadrd 2001 ff, all rights reserved.
 Available under the same terms as Perl itself.
 
 =cut
